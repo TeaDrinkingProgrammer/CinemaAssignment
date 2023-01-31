@@ -1,10 +1,13 @@
-﻿namespace Domain;
+﻿using System.Text;
+
+
+namespace Domain;
 public class MovieScreening
 {
-    DateTime dateAndTime;
-    double pricePerSeat { get; }
+    public DateTime dateAndTime { get; }
+    public double pricePerSeat { get; }
 
-    Movie movie;
+    public Movie movie { get; }
 
     public MovieScreening(Movie movie, DateTime dateAndTime, double pricePerSeat)
     {
@@ -15,6 +18,9 @@ public class MovieScreening
 
     public override string ToString()
     {
-        return base.ToString();
+        var s = new StringBuilder();
+        s.AppendLine($"Price per seat: {pricePerSeat}");
+        s.AppendLine($"Time: {dateAndTime.ToString()}");
+        return s.ToString();
     }
 }

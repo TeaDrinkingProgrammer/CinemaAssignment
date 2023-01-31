@@ -1,19 +1,20 @@
 ﻿namespace Domain;
 public class Movie
 {
-    string title;
+    public string title { get; }
 
     public Movie(string title)
     {
         this.title = title;
     }
 
-    public double AddScreening(MovieScreening movieScreening): void {
+    public void AddScreening(MovieScreening movieScreening)
+    {
 
     }
 
-public override string ToString()
-{
-    return base.ToString();
-}
+    public override string ToString()
+    {
+        return $"Movie Title: {title}";
+    }
 }

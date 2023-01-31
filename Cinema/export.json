@@ -1,0 +1,30 @@
+{
+  "orderNr": 10,
+  "isStudentOrder": true,
+  "movieTickets": [
+    {
+      "rowNr": 1,
+      "seatNr": 1,
+      "isPremium": false,
+      "movieScreening": {
+        "dateAndTime": "2023-01-31T14:25:04.904113+01:00",
+        "pricePerSeat": 10,
+        "movie": {
+          "title": "Puss in Boots"
+        }
+      }
+    },
+    {
+      "rowNr": 1,
+      "seatNr": 1,
+      "isPremium": false,
+      "movieScreening": {
+        "dateAndTime": "2023-01-31T14:25:04.904113+01:00",
+        "pricePerSeat": 10,
+        "movie": {
+          "title": "Puss in Boots"
+        }
+      }
+    }
+  ]
+}
