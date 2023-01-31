@@ -1,0 +1,23 @@
+OrderNr: 10
+Studentenorder
+
+----
+
+Ticket 0:
+
+Movie Title: Puss in Boots
+Price per seat: 10
+Time: 1/31/2023 2:25:04 PM
+
+Row and Seat: 1:1
+
+----
+
+Ticket 1:
+
+Movie Title: Puss in Boots
+Price per seat: 10
+Time: 1/31/2023 2:25:04 PM
+
+Row and Seat: 1:1
+
