@@ -36,6 +36,7 @@ public class MovieTicket
     {
         var s = new StringBuilder();
         s.AppendLine($"Row and Seat: {rowNr}:{seatNr}");
+        s.AppendLine($"Student discount: {(isStudentOrder ? "yes" : "no")}");
         return s.ToString();
     }
 }
