@@ -1,14 +1,12 @@
 ﻿using System.Text;
 using System.Text.Json;
-using System.Collections.Generic;
-using System;
 
 namespace Domain;
 public class Order
 {
     int orderNr { get; }
 
-    public List<MovieTicket> movieTickets {get;} = new List<MovieTicket>();
+    public List<MovieTicket> movieTickets { get; } = new List<MovieTicket>();
 
     public Order(int orderNr)
     {
@@ -22,24 +20,26 @@ public class Order
     public double CalculatePrice()
     {
         var totalPrice = 0.0;
-        var ticketPrice = 0.0;
         bool containsStudentTicket = false;
 
-        foreach(MovieTicket ticket in movieTickets)
+        foreach (MovieTicket ticket in movieTickets)
         {
-            if(ticket.isStudentOrder)
+            if (ticket.isStudentOrder)
             {
-                containsStudentTicket= true;
+                containsStudentTicket = true;
             }
-            ticketPrice = ticket.GetPrice();
+            var ticketPrice = ticket.GetPrice();
             totalPrice = totalPrice + ticketPrice;
         }
 
-        if(movieTickets.Count >= 2)
+        if (movieTickets.Count >= 2)
         {
-            if (containsStudentTicket || (DayOfWeek.Monday <= DateTime.Today.DayOfWeek && DateTime.Today.DayOfWeek <= DayOfWeek.Thursday))
+            if (
+                containsStudentTicket ||
+                (DayOfWeek.Monday <= DateTime.Today.DayOfWeek && DateTime.Today.DayOfWeek <= DayOfWeek.Thursday)
+            )
             {
-                return totalPrice = totalPrice - ticketPrice;
+                return totalPrice = totalPrice - movieTickets[1].GetPrice();
             }
         }
 
@@ -47,36 +47,37 @@ public class Order
         {
             return totalPrice = totalPrice - (totalPrice * 0.1);
         }
+
         return totalPrice;
 
     }
 
     public void Export(TicketExportFormat exportFormat)
     {
-        
-        if (exportFormat == TicketExportFormat.JSON) {
+
+        if (exportFormat == TicketExportFormat.JSON)
+        {
             System.IO.File.WriteAllText(
-                @"export.json", 
+                @"export.json",
                 JsonSerializer.Serialize(
                     this,
-                    new JsonSerializerOptions(){ PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true }
+                    new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true }
                     )
                 );
             return;
         }
 
-        if (exportFormat == TicketExportFormat.PLAINTEXT) {
-            StringBuilder s = new StringBuilder().AppendLine( $"OrderNr: {this.orderNr}");
-            if (this.isStudentOrder) {
-                s.AppendLine("Studentenorder");
-            }
-            
+        if (exportFormat == TicketExportFormat.PLAINTEXT)
+        {
+            StringBuilder s = new StringBuilder().AppendLine($"OrderNr: {this.orderNr}");
+
             s.AppendLine("");
-            
-            foreach (var (ticket, ticketNumber) in this.movieTickets.Select((v, i)=> (v, i))) {
+
+            foreach (var (ticket, ticketNumber) in this.movieTickets.Select((v, i) => (v, i)))
+            {
                 s.AppendLine("----");
                 s.AppendLine("");
-                
+
                 s.AppendLine($"Ticket {ticketNumber}:");
                 s.AppendLine("");
                 s.AppendLine(ticket.movieScreening.movie.ToString());

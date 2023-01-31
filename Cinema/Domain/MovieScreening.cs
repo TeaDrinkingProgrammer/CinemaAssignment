@@ -1,13 +1,13 @@
 ﻿using System.Text;
-using System;
+
 
 namespace Domain;
 public class MovieScreening
 {
-    public DateTime dateAndTime {get;}
+    public DateTime dateAndTime { get; }
     public double pricePerSeat { get; }
 
-    public Movie movie {get;}
+    public Movie movie { get; }
 
     public MovieScreening(Movie movie, DateTime dateAndTime, double pricePerSeat)
     {
