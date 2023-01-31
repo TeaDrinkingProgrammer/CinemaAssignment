@@ -2,7 +2,7 @@
 public class MovieScreening
 {
     DateTime dateAndTime;
-    double pricePerSeat { get; }
+    public double pricePerSeat { get; }
 
     Movie movie;
 
