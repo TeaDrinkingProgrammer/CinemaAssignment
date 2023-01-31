@@ -1,11 +1,13 @@
-﻿namespace Domain;
+﻿using System.Text;
+
+namespace Domain;
 public class MovieTicket
 {
-    int rowNr;
-    int seatNr;
-    bool isPremium { get; }
+    public int rowNr {get;}
+    public int seatNr { get; }
+    public bool isPremium { get; }
 
-    MovieScreening movieScreening;
+    public MovieScreening movieScreening {get;}
 
     public MovieTicket(MovieScreening movieScreening, bool isPremiumReservation, int seatRow, int seatNr)
     {
@@ -15,13 +17,15 @@ public class MovieTicket
         this.movieScreening = movieScreening;
     }
 
-    public double GetPrice()
-    {
+    // public double GetPrice()
+    // {
 
-    }
+    // }
 
     public override string ToString()
     {
-        return base.ToString();
+        var s = new StringBuilder();
+        s.AppendLine($"Row and Seat: {rowNr}:{seatNr}");
+        return s.ToString();
     }
 }
