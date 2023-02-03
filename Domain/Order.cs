@@ -22,30 +22,31 @@ public class Order
         var totalPrice = 0.0;
         bool containsStudentTicket = false;
 
-        foreach (MovieTicket ticket in movieTickets)
+        foreach (var (ticket, ticketNumber) in movieTickets.Select((v, i) => (v, i)))
         {
             if (ticket.isStudentOrder)
             {
                 containsStudentTicket = true;
             }
+
+            var dayOfTheWeek = ticket.movieScreening.dateAndTime.DayOfWeek;
+            if ((ticketNumber + 1) % 2 == 0) {
+                if (
+                    containsStudentTicket ||
+                    (DayOfWeek.Monday <= dayOfTheWeek && dayOfTheWeek <= DayOfWeek.Thursday)
+                )
+                {
+                    break;
+                }
+            }
+
             var ticketPrice = ticket.GetPrice();
             totalPrice = totalPrice + ticketPrice;
         }
 
-        if (movieTickets.Count >= 2)
-        {
-            if (
-                containsStudentTicket ||
-                (DayOfWeek.Monday <= DateTime.Today.DayOfWeek && DateTime.Today.DayOfWeek <= DayOfWeek.Thursday)
-            )
-            {
-                return totalPrice = totalPrice - movieTickets[1].GetPrice();
-            }
-        }
-
         if (movieTickets.Count >= 6)
         {
-            return totalPrice = totalPrice - (totalPrice * 0.1);
+            return totalPrice *= 0.9;
         }
 
         return totalPrice;

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Text;
 
 namespace Domain;
 public class MovieTicket
@@ -21,15 +22,7 @@ public class MovieTicket
 
     public double GetPrice()
     {
-        if (this.isPremium && this.isStudentOrder)
-        {
-            return this.movieScreening.pricePerSeat + 2;
-        }
-        if (this.isPremium)
-        {
-            return this.movieScreening.pricePerSeat + 3;
-        }
-        return this.movieScreening.pricePerSeat;
+        return this.movieScreening.pricePerSeat + (this.isPremium ? (this.isStudentOrder ? 2 : 3) : 0);
     }
 
     public override string ToString()
