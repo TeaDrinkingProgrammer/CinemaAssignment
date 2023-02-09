@@ -8,11 +8,6 @@ public class Movie
         this.title = title;
     }
 
-    public void AddScreening(MovieScreening movieScreening)
-    {
-
-    }
-
     public override string ToString()
     {
         return $"Movie Title: {title}";

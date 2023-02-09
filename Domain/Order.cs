@@ -30,14 +30,12 @@ public class Order
             }
 
             var dayOfTheWeek = ticket.movieScreening.dateAndTime.DayOfWeek;
-            if ((ticketNumber + 1) % 2 == 0) {
-                if (
-                    containsStudentTicket ||
-                    (DayOfWeek.Monday <= dayOfTheWeek && dayOfTheWeek <= DayOfWeek.Thursday)
-                )
-                {
+            if (
+                (ticketNumber + 1) % 2 == 0 
+                && 
+                (containsStudentTicket || (DayOfWeek.Monday <= dayOfTheWeek && dayOfTheWeek <= DayOfWeek.Thursday))
+             ) {
                     break;
-                }
             }
 
             var ticketPrice = ticket.GetPrice();
@@ -46,7 +44,7 @@ public class Order
 
         if (movieTickets.Count >= 6)
         {
-            return totalPrice *= 0.9;
+            return totalPrice * 0.9;
         }
 
         return totalPrice;

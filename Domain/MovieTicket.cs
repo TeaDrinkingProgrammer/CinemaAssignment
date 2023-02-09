@@ -22,7 +22,10 @@ public class MovieTicket
 
     public double GetPrice()
     {
-        return this.movieScreening.pricePerSeat + (this.isPremium ? (this.isStudentOrder ? 2 : 3) : 0);
+        if (this.isPremium) {
+            return this.movieScreening.pricePerSeat + (this.isStudentOrder ? 2 : 3);
+        }
+        return this.movieScreening.pricePerSeat;
     }
 
     public override string ToString()
