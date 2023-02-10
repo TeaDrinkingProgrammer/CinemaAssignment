@@ -9,14 +9,15 @@ public class CalculatePriceTest
     {
         Movie movie = new Movie("Testmovie");
         MovieScreening screening = new MovieScreening(movie, DateTime.Parse("13:00 01-01-2023"),10.00m);
-        MovieTicket ticket1 = new MovieTicket(screening, false, 1, 1, true);
-        MovieTicket ticket2 = new MovieTicket(screening, false, 1, 2, false);
+        MovieTicket ticket1 = new MovieTicket(screening, new StudentPriceCalculator(false), 1, 1);
+        MovieTicket ticket2 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 2);
 
         Order order = new Order(1);
         order.AddSeatReservation(ticket1);
         order.AddSeatReservation(ticket2);
-
-        Assert.Equal(10.00m, order.CalculatePrice());
+        
+        decimal sut = order.CalculatePrice();
+        Assert.Equal(10.00m, sut);
     }
 
     [Fact]
@@ -24,8 +25,8 @@ public class CalculatePriceTest
     {
         Movie movie = new Movie("Testmovie");
         MovieScreening screening = new MovieScreening(movie, DateTime.Parse("13:00 03-01-2023"),10.00m);
-        MovieTicket ticket1 = new MovieTicket(screening, false, 1, 1, false);
-        MovieTicket ticket2 = new MovieTicket(screening, false, 1, 2, false);
+        MovieTicket ticket1 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 1);
+        MovieTicket ticket2 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 2);
 
         Order order = new Order(1);
         order.AddSeatReservation(ticket1);
@@ -41,12 +42,12 @@ public class CalculatePriceTest
     {
         Movie movie = new Movie("Testmovie");
         MovieScreening screening = new MovieScreening(movie, DateTime.Parse("13:00 01-01-2023"),10.00m);
-        MovieTicket ticket1 = new MovieTicket(screening, false, 1, 1, false);
-        MovieTicket ticket2 = new MovieTicket(screening, false, 1, 2, false);
-        MovieTicket ticket3 = new MovieTicket(screening, false, 1, 3, false);
-        MovieTicket ticket4 = new MovieTicket(screening, false, 1, 4, false);
-        MovieTicket ticket5 = new MovieTicket(screening, false, 1, 5, false);
-        MovieTicket ticket6 = new MovieTicket(screening, false, 1, 6, false);
+        MovieTicket ticket1 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 1);
+        MovieTicket ticket2 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 2);
+        MovieTicket ticket3 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 3);
+        MovieTicket ticket4 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 4);
+        MovieTicket ticket5 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 5);
+        MovieTicket ticket6 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 6);
 
         Order order = new Order(1);
         order.AddSeatReservation(ticket1);
@@ -66,11 +67,11 @@ public class CalculatePriceTest
     {
         Movie movie = new Movie("Testmovie");
         MovieScreening screening = new MovieScreening(movie, DateTime.Parse("13:00 01-01-2023"),10.00m);
-        MovieTicket ticket1 = new MovieTicket(screening, false, 1, 1, false);
-        MovieTicket ticket2 = new MovieTicket(screening, false, 1, 2, false);
-        MovieTicket ticket3 = new MovieTicket(screening, false, 1, 3, false);
-        MovieTicket ticket4 = new MovieTicket(screening, false, 1, 4, false);
-        MovieTicket ticket5 = new MovieTicket(screening, false, 1, 5, false);
+        MovieTicket ticket1 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 1);
+        MovieTicket ticket2 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 2);
+        MovieTicket ticket3 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 3);
+        MovieTicket ticket4 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 4);
+        MovieTicket ticket5 = new MovieTicket(screening, new NormalPriceCalculator(false), 1, 5);
 
         Order order = new Order(1);
         order.AddSeatReservation(ticket1);
@@ -89,7 +90,7 @@ public class CalculatePriceTest
     {
         Movie movie = new Movie("Testmovie");
         MovieScreening screening = new MovieScreening(movie, DateTime.Parse("13:00 01-01-2023"),10.00m);
-        MovieTicket ticket1 = new MovieTicket(screening, true, 1, 1, true);
+        MovieTicket ticket1 = new MovieTicket(screening, new StudentPriceCalculator(true), 1, 1);
 
         Order order = new Order(1);
         order.AddSeatReservation(ticket1);
@@ -104,7 +105,7 @@ public class CalculatePriceTest
     {
         Movie movie = new Movie("Testmovie");
         MovieScreening screening = new MovieScreening(movie, DateTime.Parse("13:00 01-01-2023"),10.00m);
-        MovieTicket ticket1 = new MovieTicket(screening, true, 1, 1, false);
+        MovieTicket ticket1 = new MovieTicket(screening, new NormalPriceCalculator(true), 1, 1);
 
         Order order = new Order(1);
         order.AddSeatReservation(ticket1);
@@ -119,8 +120,8 @@ public class CalculatePriceTest
     {
         Movie movie = new Movie("Testmovie");
         MovieScreening screening = new MovieScreening(movie, DateTime.Parse("13:00 01-01-2023"),10.00m);
-        MovieTicket ticket1 = new MovieTicket(screening, true, 1, 1, true);
-        MovieTicket ticket2 = new MovieTicket(screening, true, 1, 1, false);
+        MovieTicket ticket1 = new MovieTicket(screening, new StudentPriceCalculator(true), 1, 1);
+        MovieTicket ticket2 = new MovieTicket(screening, new NormalPriceCalculator(true), 1, 1);
         
         Order order = new Order(1);
         order.AddSeatReservation(ticket1);

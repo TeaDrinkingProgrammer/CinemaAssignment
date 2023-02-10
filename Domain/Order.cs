@@ -4,7 +4,7 @@ using System.Text.Json;
 namespace Domain;
 public class Order
 {
-    int orderNr { get; }
+    public int orderNr { get; }
 
     public List<MovieTicket> movieTickets { get; } = new List<MovieTicket>();
 
@@ -24,7 +24,7 @@ public class Order
 
         foreach (var (ticket, ticketNumber) in movieTickets.Select((v, i) => (v, i)))
         {
-            if (ticket.isStudentOrder)
+            if (ticket.priceCalculator.GetType() == typeof(StudentPriceCalculator))
             {
                 containsStudentTicket = true;
             }
@@ -51,39 +51,8 @@ public class Order
 
     }
 
-    public void Export(TicketExportFormat exportFormat)
+    public void Export(ExportMethod exportMethod)
     {
-
-        if (exportFormat == TicketExportFormat.JSON)
-        {
-            System.IO.File.WriteAllText(
-                @"export.json",
-                JsonSerializer.Serialize(
-                    this,
-                    new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true }
-                    )
-                );
-            return;
-        }
-
-        if (exportFormat == TicketExportFormat.PLAINTEXT)
-        {
-            StringBuilder s = new StringBuilder().AppendLine($"OrderNr: {this.orderNr}");
-
-            s.AppendLine("");
-
-            foreach (var (ticket, ticketNumber) in this.movieTickets.Select((v, i) => (v, i)))
-            {
-                s.AppendLine("----");
-                s.AppendLine("");
-
-                s.AppendLine($"Ticket {ticketNumber}:");
-                s.AppendLine("");
-                s.AppendLine(ticket.movieScreening.movie.ToString());
-                s.AppendLine(ticket.movieScreening.ToString());
-                s.AppendLine(ticket.ToString());
-            }
-            System.IO.File.WriteAllText(@"export.txt", s.ToString());
-        }
+        exportMethod.export(this);
     }
 }
