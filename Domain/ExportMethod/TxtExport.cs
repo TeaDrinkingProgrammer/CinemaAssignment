@@ -1,7 +1,7 @@
 using System.Text;
 
 namespace Domain;
-public class TXTExport: ExportMethod
+public class TxtExport: ExportMethod
 {
     
     override public void export(Order order){

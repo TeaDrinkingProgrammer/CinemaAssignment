@@ -1,7 +1,7 @@
 using System.Text.Json;
 
 namespace Domain;
-public class JSONExport: ExportMethod
+public class JsonExport: ExportMethod
 {
 
     override public void export(Order order){
