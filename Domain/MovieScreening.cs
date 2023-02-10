@@ -5,11 +5,11 @@ namespace Domain;
 public class MovieScreening
 {
     public DateTime dateAndTime { get; }
-    public double pricePerSeat { get; }
+    public decimal pricePerSeat { get; }
 
     public Movie movie { get; }
 
-    public MovieScreening(Movie movie, DateTime dateAndTime, double pricePerSeat)
+    public MovieScreening(Movie movie, DateTime dateAndTime, decimal pricePerSeat)
     {
         this.dateAndTime = dateAndTime;
         this.pricePerSeat = pricePerSeat;

@@ -17,9 +17,9 @@ public class Order
         this.movieTickets.Add(ticket);
     }
 
-    public double CalculatePrice()
+    public decimal CalculatePrice()
     {
-        var totalPrice = 0.0;
+        Decimal totalPrice = 0.0m;
         bool containsStudentTicket = false;
 
         foreach (var (ticket, ticketNumber) in movieTickets.Select((v, i) => (v, i)))
@@ -44,7 +44,7 @@ public class Order
 
         if (movieTickets.Count >= 6)
         {
-            return totalPrice * 0.9;
+            return totalPrice * 0.9m;
         }
 
         return totalPrice;

@@ -20,7 +20,7 @@ public class MovieTicket
         this.isStudentOrder = isStudentOrder;
     }
 
-    public double GetPrice()
+    public decimal GetPrice()
     {
         if (this.isPremium) {
             return this.movieScreening.pricePerSeat + (this.isStudentOrder ? 2 : 3);
