@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
+using Domain.OrderState;
 
 namespace Domain;
 public class Order
@@ -7,14 +8,47 @@ public class Order
     public int orderNr { get; }
 
     public List<MovieTicket> movieTickets { get; } = new List<MovieTicket>();
-
+    public IOrderState OrderState { get; set; }
+    public NewOrderState NewOrderState { get;}
+    public ReservedOrderState ReservedOrderState { get; }
+    public ProvisionalOrderState ProvisionalOrderState { get; }
+    public PayedOrderState PayedOrderState { get; }
+    public CancelledOrderState CancelledOrderState { get; }
     public Order(int orderNr)
     {
         this.orderNr = orderNr;
+        OrderState = new NewOrderState(this);
+        
+        NewOrderState = new NewOrderState(this);
+        ReservedOrderState = new ReservedOrderState(this);
+        ProvisionalOrderState = new ProvisionalOrderState(this);
+        PayedOrderState = new PayedOrderState(this);
+        CancelledOrderState = new CancelledOrderState(this);
     }
-    public void AddSeatReservation(MovieTicket ticket)
+
+    public void SubmitChanges()
     {
-        this.movieTickets.Add(ticket);
+        OrderState.SubmitChanges();
+    }
+    
+    public void Cancel()
+    {
+        OrderState.Cancel();
+    }
+
+    public void Provision()
+    {
+        OrderState.Provision();
+    }
+
+    public void Pay()
+    {
+        OrderState.Pay();
+    }
+
+    public void AddSeatReservation(MovieTicket movieTicket)
+    {
+        OrderState.AddSeatReservation(movieTicket);
     }
 
     public decimal CalculatePrice()
