@@ -8,4 +8,4 @@ MovieTicket ticket2 = new MovieTicket(screening, new NormalPriceCalculator(true)
 
 Order order = new Order(1);
 order.AddSeatReservation(ticket1);
-order.Export(new JSONExport());
+order.Export(new JsonExport());
