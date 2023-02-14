@@ -21,6 +21,8 @@ public class ReservedOrderState : IOrderState
 
     public void Pay()
     {
+        Console.WriteLine("Purchasing tickets...");
+        Order.NotifyObservers();
         Order.OrderState = Order.PayedOrderState;
     }
 

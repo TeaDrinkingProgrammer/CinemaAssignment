@@ -12,6 +12,7 @@ public class NewOrderState : IOrderState
     public void SubmitChanges()
     {
         Console.WriteLine("Submitting changes...");
+        Order.NotifyObservers();
         Order.OrderState = Order.ReservedOrderState;
     }
 
