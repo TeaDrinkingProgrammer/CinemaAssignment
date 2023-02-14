@@ -1,9 +1,10 @@
 ﻿using System.Text;
 using System.Text.Json;
+using Domain.Observer;
 using Domain.OrderState;
 
 namespace Domain;
-public class Order
+public class Order : Observable
 {
     public int orderNr { get; }
 
@@ -83,6 +84,17 @@ public class Order
 
         return totalPrice;
 
+    }
+
+    public void AddObserver(IObserver observer)
+    {
+        if (Observers.Count != 0)
+        {
+            Console.WriteLine("Cannot add another medium!");
+            return;
+        }
+        
+        Observers.Add(observer);
     }
 
     public void Export(ExportMethod exportMethod)

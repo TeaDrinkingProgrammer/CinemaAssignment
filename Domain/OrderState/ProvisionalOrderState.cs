@@ -17,12 +17,14 @@ public class ProvisionalOrderState : IOrderState
     public void Cancel()
     {
         Console.WriteLine("Cancelling order..");
+        Order.NotifyObservers();
         Order.OrderState = Order.CancelledOrderState;
     }
 
     public void Pay()
     {
         Console.WriteLine("Purchasing tickets..");
+        Order.NotifyObservers();
         Order.OrderState = Order.PayedOrderState;
     }
 
